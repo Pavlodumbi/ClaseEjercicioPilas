@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Pila<T> {
     private T[]pila;
     private int tope;
@@ -34,5 +36,13 @@ public class Pila<T> {
         return tope == -1;
     }
 
+    @Override
+    public String toString() {
+        String retorno ="";
+        for(int i =0; i<= tope; i++){
+            retorno+=" " + pila[i];
+        }
+        return retorno;
+    }
 }
 
