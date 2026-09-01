@@ -25,7 +25,10 @@ void main() {
     System.out.println(revisarSintaxis("{)"));
 
     int[] numeros = {1,2,3,4,0,-5,2,3};
-    System.out.println(ordenarMenoraMayor(numeros));
+    String impresion = "";
+    for(int i = 0; i < numeros.length; i++) impresion += numeros[i] + " ";
+    System.out.println("numeros antes de ordenar: " + impresion);
+    System.out.println("numeros al ordenarlos: " + ordenarMenoraMayor(numeros));
 
 }
 
