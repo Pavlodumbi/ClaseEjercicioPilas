@@ -22,7 +22,7 @@ void main() {
     System.out.println(revisarSintaxis("{5(5x+6)9+4[45][6x+8]}"));
 
     System.out.println("Ejemplo con cadena mala: {)[()]()}");
-    System.out.println(revisarSintaxis("{[()]()}"));
+    System.out.println(revisarSintaxis("{)"));
 
     int[] numeros = {1,2,3,4,0,-5,2,3};
     System.out.println(ordenarMenoraMayor(numeros));
@@ -51,49 +51,40 @@ public boolean revisarSintaxis(String cadena){
        }
 
        if (aEnviar.equalsIgnoreCase(")") ||  aEnviar.equalsIgnoreCase("]") || aEnviar.equalsIgnoreCase("}")){
+            if (pila.vacia()) return false;
             String sacado = (String) pila.pop();
-            if (sacado == null) return false;
-            if(esParentesis(aEnviar) && esParentesis(sacado)) {
-                if(sonIguales(aEnviar,sacado)) return false;
-            }
-
-            if(esCorchete(aEnviar) && esCorchete(sacado)) {
-                if(sonIguales(aEnviar,sacado)) return false;
-            }
-
-            if(esLLave(aEnviar) && esLLave(sacado)) {
-                if(sonIguales(aEnviar,sacado)) return false;
-            }
-
+            if(!sonPares(aEnviar,sacado)) return false;
        }
     }
     return pila.vacia(); //Si la pila no esta vacia tambien retorna falso
 }
 
-public boolean esParentesis(String caracter){
-    Boolean es = false;
-    if(caracter.equals("(")) es = true;
-    else if(caracter.equals(")")) es = true;
-    return es;
-}
-
-public boolean esCorchete(String caracter){
-    Boolean es = false;
-    if(caracter.equals("[")) es = true;
-    else if(caracter.equals("]")) es = true;
-    return es;
-}
-
-public boolean esLLave(String caracter){
-    Boolean es = false;
-    if(caracter.equals("{")) es = true;
-    else if(caracter.equals("}")) es = true;
-    return es;
-}
+//public boolean esParentesis(String caracter){
+//    Boolean es = false;
+//    if(caracter.equals("(")) es = true;
+//    else if(caracter.equals(")")) es = true;
+//    return es;
+//}
+//
+//public boolean esCorchete(String caracter){
+//    Boolean es = false;
+//    if(caracter.equals("[")) es = true;
+//    else if(caracter.equals("]")) es = true;
+//    return es;
+//}
+//
+//public boolean esLLave(String caracter){
+//    Boolean es = false;
+//    if(caracter.equals("{")) es = true;
+//    else if(caracter.equals("}")) es = true;
+//    return es;
+//}
 
 //Metodo que nos sirve para comparar todos
-public boolean sonIguales(String caracter1, String caracter2){
-    if (caracter1.equalsIgnoreCase(caracter2)) return true;
+public boolean sonPares(String caracter1, String caracter2){
+    if(caracter1.equalsIgnoreCase(")") && caracter2.equalsIgnoreCase("(")) return true;
+    if(caracter1.equalsIgnoreCase("]") && caracter2.equalsIgnoreCase("[")) return true;
+    if(caracter1.equalsIgnoreCase("}") && caracter2.equalsIgnoreCase("{")) return true;
     return false;
 }
 
